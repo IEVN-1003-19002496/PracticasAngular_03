@@ -1,16 +1,155 @@
-.container
-{
-    display: block;
-    flex-direction: row;
-    margin: 3rem auto;
+body,
+html {
+  width: 100%;
+  height: 100%;
 }
 
-h1
-{
-    text-align: center;
+body {
+  background: radial-gradient(circle, rgb(10 60 202) 0%, #042e52 100%);
 }
 
-.mat-card-header
+svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+body 
 {
+    background-color: blue;
+}
+
+.img
+{
+  width: 400px; 
+  height: auto; 
+  display: block; 
+  margin: 0 auto; 
+}
+
+.container 
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 3rem auto;
+}
+
+.form-section 
+{
+  flex: 1;
+  margin-right: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.result-section 
+{
+  flex: 1;
+  margin-left: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+h3 
+{
+  text-align: center; 
+  padding: 5px; 
+  background-color: #003f83; 
+  color: white; 
+  font-weight: bold; 
+  border-radius: 5px; 
+  margin: 5px 0;
+}
+
+/* Estilo para el fondo de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Estilo para el contenedor principal */
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
     text-align: center;
+    max-width: 400px;
+}
+
+/* Estilo para la sección del formulario */
+.form-section {
+    margin-bottom: 20px;
+}
+
+/* Estilo para la sección de resultados (inicialmente oculta) */
+.result-section {
+    display: none;
+}
+
+/* Estilo para la imagen del logo */
+.img {
+    width: 100px;
+}
+
+/* Estilo para el título principal */
+h1 {
+    color: #007BFF; /* Color azul */
+}
+
+/* Estilo para el encabezado del card de entrada */
+.mat-card-header {
+    background-color: #007BFF; /* Color azul */
+    color: white; /* Texto en blanco */
+}
+
+/* Estilo para las etiquetas de formulario */
+mat-label {
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilo para el contenedor de botones */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+button{
+    border:0;
+    background-image: linear-gradient(
+        150deg,
+        #9500,
+        #09F,
+        #00DDFF
+    );
+    border-radius: 8px;
+color:#fff;
+display: flex;
+font-size: 18px;
+padding: 4px;
+cursor: pointer;
+transition: .3s;
+}
+
+button span{
+    background-color: #111;
+    padding: 16px 24px;
+    border-radius: 6px;
+    transition: .3s;
+}
+button:hover span {
+    background: none;
+}
+button:active {
+    transform: scale(0,9)
 }

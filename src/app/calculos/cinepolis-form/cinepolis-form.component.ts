@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-cinepolis-form',
@@ -7,46 +11,105 @@ import { Component } from '@angular/core';
 })
 export class CinepolisFormComponent 
 {
-  nombre: string = "";
-  catComprador: number = 0;
-  catBoletos: number = 0;
-  valor: number = 0;
-  total: number = 0;
-  tarjeta: string = "";
+  nom:string="";
+  cant!: number;
+  bol!: number;
+  total:any;
+  costo: number = 12.00;
+  imp: boolean = false;
+  mensaje: string = "";
+  check: number = 0;
+  res: number = 0.0;
+  tarjSeleccionada: string = 'No';
+  
+  tarj=[
+    'Si',
+    'No',
+  ];
 
-  Pagar(): void {
-    const catBoletos = this.catBoletos;
-    const catComprador = this.catComprador;
-    const tarjeta = this.tarjeta === 'Si';
-  
-    let descuento = 0;
-  
-    if (catBoletos >= 5) 
-    {
-      descuento = 0.15; 
-    } 
-    
-    else if (catBoletos >= 3 && catBoletos <= 5) 
-    {
-      descuento = 0.10; 
+  ngOnInit(): void {
+    this.imp = false;
+  }
+
+  Procesar():void{
+    this.check= this.bol/this.cant;
+    if(this.nom=="" || this.cant==null || this.bol==null) {
+      this.imp=false;
+      alert("Ingrese datos faltantes para continuar");
     }
-  
-    const precioBoleto = 12.000;
-  
-    let valor = catBoletos * precioBoleto * catComprador; 
-    
-    if (descuento > 0) 
-    {
-      valor -= valor * descuento;
+    else if(this.check>=7.1){
+      this.imp=false;
+      alert("Solo se pueden adquirir 7 boletas por cliente");
+      this.total=null;
     }
-  
-    if (tarjeta) 
-    {
-      const descuentoTarjeta = 0.10; 
-      valor -= valor * descuentoTarjeta;
+    else if(this.check<=7){
+      this.Proceso();
     }
-  
-    this.valor = valor;
-    this.total = valor;
+  }
+    Proceso():void{
+      switch(this.tarjSeleccionada){
+        case 'No':
+        if (this.bol>=6)  {
+        this.mensaje="";
+        this.res=(this.bol * this.costo);
+        this.total=(this.res*0.15);
+        this.res=(this.res-this.total);
+        this.total=this.res.toFixed(2);
+        this.imp = true;
+      }
+        else if (this.bol>=3 && this.bol<=5) {
+        this.mensaje="";
+        this.res = (this.bol * this.costo);
+        this.total = (this.res*0.10);
+        this.res = (this.res-this.total);
+        this.total = this.res.toFixed(2);
+        this.imp = true;
+      }
+        else if (this.bol>=1 && this.bol<=2) {
+        this.mensaje="";
+        this.total = (this.bol * this.costo).toFixed(2);
+        this.imp = true;
+     }
+     break;
+     case 'Si' :
+      if(this.bol >= 6){
+        this.mensaje="";
+        this.res=this.bol * this.costo;
+        this.total=(this.res*0.15);
+        this.res=(this.res-this.total);
+        this.total=(this.res*0.10)
+        this.res=(this.res-this.total);
+        this.total=this.res.toFixed(2);
+        this.imp = true;
+      }
+      else if(this.bol>=3 && this.bol<=5) {
+        this.mensaje="";
+        this.res=this.bol*this.costo;
+        this.total=(this.res*0.10);
+        this.res=(this.res-this.total);
+        this.total=(this.res*0.10)
+        this.res=(this.res-this.total);
+        this.total=this.res.toFixed(2);
+        this.imp = true;
+      }
+      else if(this.bol>=1 && this.bol<=2){
+        this.mensaje="";
+        this.res=this.bol*this.costo;
+        this.total=(this.res*0.10);
+        this.res=(this.res-this.total);
+        this.total=this.res.toFixed(2);
+        this.imp = true;
+      }
+      break;
+    }
+  }
+  cancelar(): void{
+    this.nom="";
+    this.cant=0;
+    this.bol=0;
+    this.total=null;
+    this.tarj=["Si","No"];
+    this.imp = false;
+    this.mensaje = "";
   }
 }
